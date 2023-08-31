@@ -37,7 +37,7 @@ export default function Home() {
       </ul>
       <div className="flex gap-3 my-5">
         <Link
-          href={""}
+          href={"/chat"}
           className="bg-purple-800 text-purple-50 p-2 rounded-lg hover:cursor-pointer"
         >
           Ir al chat
