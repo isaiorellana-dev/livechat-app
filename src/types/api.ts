@@ -1,4 +1,4 @@
-export interface message {
+export type message = {
   id: number
   body: string
   nickname: string
