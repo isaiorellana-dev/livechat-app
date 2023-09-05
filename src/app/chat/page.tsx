@@ -6,7 +6,6 @@ import { PENDING, OFFLINE_STATE, SUCCESS } from "@/constants/strings"
 import useMessages from "@/api/hooks/useMessages"
 import { REJECTED } from "../../constants/strings"
 import Message from "./components/Message"
-import { gsap } from "gsap"
 import { messagesObserver } from "@/utils/observerAnimator"
 
 type chatStateI = {
@@ -52,8 +51,8 @@ export default function Chat() {
       const childrens = messageContainerRef.current.childNodes
       for (let index = 0; index < childrens.length; index++) {
         const element = childrens[index]
-        if (element instanceof Element) {
-          messagesObserver.observe(element)
+        if (element instanceof Element && messagesObserver() !== undefined) {
+          messagesObserver()?.observe(element)
         }
       }
     }
