@@ -7,6 +7,8 @@ import useMessages from "@/api/hooks/useMessages"
 import { REJECTED } from "../../constants/strings"
 import Message from "./components/Message"
 import { messagesObserver } from "@/utils/observerAnimator"
+import LoadingMessages from "./components/LoadingMessages"
+import ErrorMessages from "./components/ErrorMessages"
 
 type chatStateI = {
   loading: loadingT
@@ -64,8 +66,12 @@ export default function Chat() {
         className="w-full max-w-xl h-screen overflow-y-scroll overflow-x-hidden flex flex-col items-center"
         ref={messageContainerRef}
       >
+        {loading === PENDING && <LoadingMessages />}
+
         {loading === SUCCESS &&
-          messages.map((m, i) => <Message key={m.id} index={i} message={m} />)}
+          messages.map((m, i) => <Message key={i} index={i} message={m} />)}
+
+        {loading === REJECTED && <ErrorMessages />}
       </div>
     </main>
   )

@@ -119,4 +119,22 @@ export const messages = [
     nickname: "jaime",
     created_at: "2023-08-20T23:43:30.881401Z",
   },
+  {
+    id: 55,
+    body: "Este es el chat en vivo de los oyentes de Conexion Celestial Radio, crea gratis tu usuario y participa del chat, saludanos, pide tu alabanza favorita o cuentanos desde que parte del mundo nos escuchas!!",
+    nickname: "isai",
+    created_at: "2023-08-19T02:18:07.046307Z",
+  },
+  {
+    id: 49,
+    body: "Por favor respetar a todos los participantes del chat, los mensajes inapropiados, fuera de lugar o que intenten agredir a las demas personas provocaran que la cuenta sea eliminada.",
+    nickname: "isai",
+    created_at: "2023-08-19T02:16:07.330789Z",
+  },
+  {
+    id: 43,
+    body: "por favor ser respetuosos",
+    nickname: "isai",
+    created_at: "2023-08-17T02:34:59.654834Z",
+  },
 ]
