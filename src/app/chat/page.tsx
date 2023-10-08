@@ -9,6 +9,7 @@ import Message from "./components/Message"
 import { messagesObserver } from "@/utils/observerAnimator"
 import LoadingMessages from "./components/LoadingMessages"
 import ErrorMessages from "./components/ErrorMessages"
+import MessageSender from "./components/MessageSender"
 
 type chatStateI = {
   loading: loadingT
@@ -63,6 +64,7 @@ export default function Chat() {
   return (
     <main className="relative flex-grow flex flex-col items-center justify-between">
       <div
+        style={{ height: "calc(100vh - 80px)" }}
         className="w-full max-w-xl h-screen overflow-y-scroll overflow-x-hidden flex flex-col items-center"
         ref={messageContainerRef}
       >
@@ -73,6 +75,7 @@ export default function Chat() {
 
         {loading === REJECTED && <ErrorMessages />}
       </div>
+      <MessageSender />
     </main>
   )
 }

@@ -1,7 +1,7 @@
-import { MessagePropsT } from "@/types/components"
+import { messagePropsT } from "@/types/components"
 import { getDate, isEven } from "@/utils/math"
 
-const Message = (props: MessagePropsT) => {
+const Message = (props: messagePropsT) => {
   const { message, index } = props
   const { year, month, day, hours, minutes } = getDate(message.created_at)
 

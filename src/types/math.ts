@@ -1,4 +1,4 @@
-export type DateInfoT = {
+export type dateInfoT = {
   year: number
   month: number
   day: number

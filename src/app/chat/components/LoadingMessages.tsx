@@ -7,7 +7,7 @@ const LoadingMessages = () => {
   )
   return (
     <>
-      {numbersArray.map((m, i) => (
+      {numbersArray.map((_, i) => (
         <div
           key={i}
           className={`w-full max-w-xl ${
