@@ -11,8 +11,17 @@ export interface user {
   role: string
   created_at: string
 }
+export interface signUpRes {
+  id: number
+  nickname: string
+  created_at: string
+}
 
 export interface userData {
   nickname: string
   role: string
+}
+
+export interface token {
+  token: string
 }

@@ -1,8 +1,8 @@
-import { DateInfoT } from "@/types/math"
+import { dateInfoT } from "@/types/math"
 
 export const isEven = (n: number): boolean => n % 2 === 0
 
-export const getDate = (iso: string): DateInfoT => {
+export const getDate = (iso: string): dateInfoT => {
   const date = new Date(iso)
 
   const year = date.getFullYear()

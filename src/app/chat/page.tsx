@@ -1,8 +1,13 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
-import { loadingT, wsStatusT } from "@/types/strings"
+import { loading, wsStatusT } from "@/types/strings"
 import { message } from "@/types/api"
-import { PENDING, OFFLINE_STATE, SUCCESS } from "@/constants/strings"
+import {
+  PENDING,
+  OFFLINE_STATE,
+  SUCCESS,
+  ONLINE_STATE,
+} from "@/constants/strings"
 import useMessages from "@/api/hooks/useMessages"
 import { REJECTED } from "../../constants/strings"
 import Message from "./components/Message"
@@ -12,7 +17,7 @@ import ErrorMessages from "./components/ErrorMessages"
 import MessageSender from "./components/MessageSender"
 
 type chatStateI = {
-  loading: loadingT
+  loading: loading
   ws: wsStatusT
   messages: Array<message>
 }
@@ -42,6 +47,32 @@ export default function Chat() {
           loading: REJECTED,
         })
       })
+
+    let URL = ""
+
+    if (process.env.NEXT_PUBLIC_WS_URL) {
+      URL = process.env.NEXT_PUBLIC_WS_URL
+
+      const socket = new WebSocket(URL)
+
+      socket.onopen = () => {
+        setChatState({ ...chatState, ws: ONLINE_STATE })
+      }
+      socket.onmessage = (event) => {
+        const mensaje = event.data
+
+        setChatState({
+          ...chatState,
+          messages: [...messages, JSON.parse(mensaje)],
+        })
+      }
+      socket.onclose = () => {
+        setChatState({ ...chatState, ws: OFFLINE_STATE })
+      }
+      return () => {
+        socket.close()
+      }
+    }
   }, [])
 
   useEffect(() => {

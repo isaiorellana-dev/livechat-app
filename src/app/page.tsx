@@ -43,7 +43,7 @@ export default function Home() {
           Ir al chat
         </Link>
         <Link
-          href={""}
+          href={"/signup"}
           className="bg-purple-800 text-purple-50 p-2 rounded-lg hover:cursor-pointer"
         >
           Sign Up
