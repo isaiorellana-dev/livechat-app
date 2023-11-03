@@ -14,13 +14,23 @@ const MessageSender = () => {
       try {
         const res = await sendMessage(message)
         if (res) {
-          console.log("hello")
           setMessage("")
         }
       } catch (error: any) {
-        console.log("hi")
         if (error.status) {
-          console.log(error)
+          switch (error.status) {
+            case 401:
+              // haz algo
+              break
+            case 500:
+              // haz algo
+              break
+            case 400:
+              // haz algo
+              break
+            default:
+            // haz default ostia
+          }
         }
       }
     }
@@ -39,6 +49,7 @@ const MessageSender = () => {
         type="text"
         // pattern="[A-Za-z0-9?@:,.;]+"
         title="Can't use that caracter"
+        value={message}
         onChange={(e) => {
           setMessage(e.target.value)
         }}
