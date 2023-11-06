@@ -1,6 +1,10 @@
+"use client"
+import { stateReduxT } from "@/types/context"
 import Link from "next/link"
+import { useSelector } from "react-redux"
 
 export default function Home() {
+  const auth = useSelector((state: stateReduxT) => state.auth)
   return (
     <main className="flex min-h-screen flex-col items-center p-5">
       <h1 className="pb-4">LiveChat App</h1>
@@ -42,12 +46,14 @@ export default function Home() {
         >
           Ir al chat
         </Link>
-        <Link
-          href={"/signup"}
-          className="bg-purple-800 text-purple-50 p-2 rounded-lg hover:cursor-pointer"
-        >
-          Sign Up
-        </Link>
+        {/* {!auth.isAuthenticated && (
+          <Link
+            href={"/signup"}
+            className="bg-purple-800 text-purple-50 p-2 rounded-lg hover:cursor-pointer"
+          >
+            Sign Up
+          </Link>
+        )} */}
       </div>
     </main>
   )

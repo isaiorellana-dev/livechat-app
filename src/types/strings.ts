@@ -12,7 +12,7 @@ import {
   BAD_REQUEST,
 } from "@/constants/strings"
 
-export type loading =
+export type loadingT =
   | typeof NONE
   | typeof PENDING
   | typeof REJECTED

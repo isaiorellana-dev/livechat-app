@@ -1,3 +1,8 @@
+export type stateReduxT = {
+  auth: authStateT
+  user: userStateT
+}
+
 export type authStateT = {
   isAuthenticated: boolean
 }

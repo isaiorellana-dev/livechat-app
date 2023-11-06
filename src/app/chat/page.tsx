@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
-import { loading, wsStatusT } from "@/types/strings"
+import { loadingT, wsStatusT } from "@/types/strings"
 import { message } from "@/types/api"
 import {
   PENDING,
@@ -17,35 +17,33 @@ import ErrorMessages from "./components/ErrorMessages"
 import MessageSender from "./components/MessageSender"
 
 type chatStateI = {
-  loading: loading
+  loading: loadingT
   ws: wsStatusT
   messages: Array<message>
 }
 
 export default function Chat() {
-  const [chatState, setChatState] = useState<chatStateI>({
-    loading: PENDING,
-    ws: OFFLINE_STATE,
-    messages: [],
-  })
-  const { messages, loading, ws } = chatState
+  // const [chatState, setChatState] = useState<chatStateI>({
+  //   loading: PENDING,
+  //   ws: OFFLINE_STATE,
+  //   messages: [],
+  // })
+  const [loading, setLoading] = useState<loadingT>()
+  const [messages, setMessages] = useState<Array<message>>([])
+  const [ws, setWs] = useState<wsStatusT>()
+
+  // const { messages, loading, ws } = chatState
   const { getMessages } = useMessages()
   const messageContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     getMessages()
       .then((res) => {
-        setChatState({
-          ...chatState,
-          messages: res,
-          loading: SUCCESS,
-        })
+        setMessages(res)
+        setLoading(SUCCESS)
       })
       .catch(() => {
-        setChatState({
-          ...chatState,
-          loading: REJECTED,
-        })
+        setLoading(REJECTED)
       })
 
     let URL = ""
@@ -56,18 +54,14 @@ export default function Chat() {
       const socket = new WebSocket(URL)
 
       socket.onopen = () => {
-        setChatState({ ...chatState, ws: ONLINE_STATE })
+        setWs(ONLINE_STATE)
       }
       socket.onmessage = (event) => {
-        const mensaje = event.data
-
-        setChatState({
-          ...chatState,
-          messages: [...messages, JSON.parse(mensaje)],
-        })
+        const message = JSON.parse(event.data)
+        setMessages((lastMessages) => [...lastMessages, message])
       }
       socket.onclose = () => {
-        setChatState({ ...chatState, ws: OFFLINE_STATE })
+        setWs(OFFLINE_STATE)
       }
       return () => {
         socket.close()
@@ -90,7 +84,7 @@ export default function Chat() {
         }
       }
     }
-  }, [chatState.messages])
+  }, [messages])
 
   return (
     <main className="relative flex-grow flex flex-col items-center justify-between">

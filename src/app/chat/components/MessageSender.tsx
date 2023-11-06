@@ -1,15 +1,19 @@
+"use client"
 import useMessages from "@/api/hooks/useMessages"
-import { AuthToken } from "@/api/services/AuthTokenService"
+import { stateReduxT } from "@/types/context"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { useSelector } from "react-redux"
 
 const MessageSender = () => {
-  const token = new AuthToken()
-  console.log(token.getToken)
   const [message, setMessage] = useState("")
   const { sendMessage } = useMessages()
+  const auth = useSelector((state: stateReduxT) => state.auth)
+  const router = useRouter()
 
   const handleSubmit = async () => {
-    const validate = message.match(/^[^\s][a-zA-Z0-9\.,@\?;\s]+[^\s]$/)
+    const validate = message.match(/^[^\s][a-zA-Z0-9\.,@:\?;\s]+[^\s]$/)
+    console.log(validate)
     if (validate != null) {
       try {
         const res = await sendMessage(message)
@@ -17,6 +21,7 @@ const MessageSender = () => {
           setMessage("")
         }
       } catch (error: any) {
+        console.log(error)
         if (error.status) {
           switch (error.status) {
             case 401:
@@ -36,6 +41,28 @@ const MessageSender = () => {
     }
   }
 
+  if (!auth.isAuthenticated) {
+    return (
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          router.push("/login")
+        }}
+        className="w-full bg-slate-500 flex justify-between max-w-xl"
+      >
+        <input
+          type="text"
+          className="w-full text-slate-900 px-1.5 h-9"
+          placeholder="Inicia sesión para enviar mensajes."
+          readOnly
+        />
+        <button className="bg-cyan-500 p-0.5" type="submit">
+          Login
+        </button>
+      </form>
+    )
+  }
+
   return (
     <form
       className="w-full max-w-xl flex"
@@ -47,12 +74,10 @@ const MessageSender = () => {
       <input
         className="w-full bg-purple-200 text-purple-800 px-2"
         type="text"
-        // pattern="[A-Za-z0-9?@:,.;]+"
+        pattern="[A-Za-z0-9?@:,.;\s]+"
         title="Can't use that caracter"
         value={message}
-        onChange={(e) => {
-          setMessage(e.target.value)
-        }}
+        onChange={(e) => setMessage(e.target.value)}
       />
       <button className="p-2 bg-purple-50 text-purple-950" type="submit">
         Send

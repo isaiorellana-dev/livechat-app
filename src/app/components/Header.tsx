@@ -1,9 +1,14 @@
 "use client"
 
+import { stateReduxT } from "@/types/context"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useSelector } from "react-redux"
+import { Profile } from "../chat/components/Profile"
 
 const Header = () => {
+  const auth = useSelector((state: stateReduxT) => state.auth)
+
   const path = usePathname()
 
   return (
@@ -23,11 +28,15 @@ const Header = () => {
               Chat
             </Link>
           </li>
-          <li>
-            <Link href={"signup"} className="hover:text-purple-200">
-              Sign Up
-            </Link>
-          </li>
+          {!auth.isAuthenticated ? (
+            <li>
+              <Link href={"signup"} className="hover:text-purple-200">
+                Sign Up
+              </Link>
+            </li>
+          ) : (
+            <Profile />
+          )}
         </ul>
       </nav>
     </header>
