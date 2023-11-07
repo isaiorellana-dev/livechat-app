@@ -5,7 +5,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik"
 import Link from "next/link"
 import * as yup from "yup"
 import { validations } from "./validations"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { requestStatus } from "@/types/components"
 import { signUpError } from "@/types/strings"
 import {
@@ -19,11 +19,16 @@ import {
 import useUser from "@/api/hooks/useUser"
 import { SUCCESS } from "../../constants/strings"
 import Error from "../components/Error"
+import { useRouter } from "next/navigation"
+import { useSelector } from "react-redux"
+import { stateReduxT } from "@/types/context"
 
 const initialForm: signup = { nickname: "", pin: "", confirmPin: "" }
 
 function SignUp() {
   const { signUp } = useUser()
+  const router = useRouter()
+  const auth = useSelector((state: stateReduxT) => state.auth)
 
   const [status, setStatus] = useState<requestStatus<signUpError>>({
     loading: NONE,
@@ -76,6 +81,12 @@ function SignUp() {
       }
     }
   }
+
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      router.push("/chat")
+    }
+  }, [auth])
 
   return (
     <main className="h-screen flex flex-col items-center justify-center">

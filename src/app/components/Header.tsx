@@ -4,7 +4,7 @@ import { stateReduxT } from "@/types/context"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useSelector } from "react-redux"
-import { Profile } from "../chat/components/Profile"
+import { Profile } from "./Profile"
 
 const Header = () => {
   const auth = useSelector((state: stateReduxT) => state.auth)

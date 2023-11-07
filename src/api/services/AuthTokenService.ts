@@ -14,7 +14,7 @@ export class AuthToken {
   }
 
   getTokenFromLocalStorage() {
-    if (window !== undefined) {
+    if (typeof window !== "undefined") {
       const token = window.localStorage.getItem(this._tokenKey)
 
       if (token !== null) {

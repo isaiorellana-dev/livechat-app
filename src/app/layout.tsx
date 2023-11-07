@@ -1,10 +1,7 @@
 import { ReduxProvider } from "@/context/provider"
 import "./globals.css"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
 import BodyWrapper from "./components/BodyWrapper"
-
-const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "LiveChat App",
@@ -20,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <ReduxProvider>
-        <BodyWrapper className={inter.className}>{children}</BodyWrapper>
+        <BodyWrapper>{children}</BodyWrapper>
       </ReduxProvider>
     </html>
   )

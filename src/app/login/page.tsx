@@ -7,11 +7,11 @@ import * as yup from "yup"
 import { validations } from "./validations"
 import useUser from "@/api/hooks/useUser"
 import { AuthToken } from "@/api/services/AuthTokenService"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { authLogIn } from "@/context/slices/authSlice"
 import { setUser } from "@/context/slices/userSlice"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
   CREDENTIALS_ERR,
   INTERNAL_ERR,
@@ -24,6 +24,7 @@ import {
 import { requestStatus } from "@/types/components"
 import Error from "../components/Error"
 import { loginError } from "@/types/strings"
+import { stateReduxT } from "@/types/context"
 
 const initialForm: loginT = { nickname: "", pin: "" }
 
@@ -31,6 +32,7 @@ function Login() {
   const router = useRouter()
   const tokenService = new AuthToken()
   const { login, getUserData } = useUser()
+  const auth = useSelector((state: stateReduxT) => state.auth)
   const dispatch = useDispatch()
 
   const [status, setStatus] = useState<requestStatus<loginError>>({
@@ -67,6 +69,13 @@ function Login() {
       }
     }
   }
+
+  useEffect(() => {
+    console.log(auth)
+    if (auth.isAuthenticated) {
+      router.push("/chat")
+    }
+  }, [auth])
 
   return (
     <main className="h-screen flex flex-col items-center justify-center">

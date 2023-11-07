@@ -7,10 +7,8 @@ import { useDispatch } from "react-redux"
 
 export default function BodyWrapper({
   children,
-  className,
 }: {
   children: React.ReactNode
-  className: string
 }) {
   const { getUserData } = useUser()
   const dispatch = useDispatch()
@@ -26,5 +24,5 @@ export default function BodyWrapper({
         dispatch(clearUser())
       })
   }, [])
-  return <body className={className}>{children}</body>
+  return <body>{children}</body>
 }

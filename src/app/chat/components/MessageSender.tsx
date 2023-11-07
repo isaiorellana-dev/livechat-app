@@ -13,7 +13,6 @@ const MessageSender = () => {
 
   const handleSubmit = async () => {
     const validate = message.match(/^[^\s][a-zA-Z0-9\.,@:\?;\s]+[^\s]$/)
-    console.log(validate)
     if (validate != null) {
       try {
         const res = await sendMessage(message)
@@ -21,20 +20,19 @@ const MessageSender = () => {
           setMessage("")
         }
       } catch (error: any) {
-        console.log(error)
         if (error.status) {
           switch (error.status) {
             case 401:
-              // haz algo
+              alert("Invalid caracters")
               break
             case 500:
-              // haz algo
+              alert("Something went wrong, try again later")
               break
             case 400:
-              // haz algo
+              router.push("/chat")
               break
             default:
-            // haz default ostia
+              alert("Something went wrong, try again later")
           }
         }
       }

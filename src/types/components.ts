@@ -1,5 +1,5 @@
 import { message } from "./api"
-import { loading } from "./strings"
+import { loadingT } from "./strings"
 
 export type messagePropsT = {
   message: message
@@ -11,6 +11,6 @@ export type childrenT = {
 }
 
 export type requestStatus<E> = {
-  loading: loading
+  loading: loadingT
   error: E
 }

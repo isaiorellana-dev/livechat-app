@@ -30,7 +30,7 @@ export function Profile() {
         {user.nickname}
       </button>
       {open && (
-        <div>
+        <div className="absolute z-10 bg-purple-950 p-1">
           <button
             onClick={() => {
               handleLogOut()
