@@ -16,23 +16,11 @@ import LoadingMessages from "./components/LoadingMessages"
 import ErrorMessages from "./components/ErrorMessages"
 import MessageSender from "./components/MessageSender"
 
-type chatStateI = {
-  loading: loadingT
-  ws: wsStatusT
-  messages: Array<message>
-}
-
 export default function Chat() {
-  // const [chatState, setChatState] = useState<chatStateI>({
-  //   loading: PENDING,
-  //   ws: OFFLINE_STATE,
-  //   messages: [],
-  // })
   const [loading, setLoading] = useState<loadingT>()
   const [messages, setMessages] = useState<Array<message>>([])
   const [ws, setWs] = useState<wsStatusT>()
 
-  // const { messages, loading, ws } = chatState
   const { getMessages } = useMessages()
   const messageContainerRef = useRef<HTMLDivElement>(null)
 
