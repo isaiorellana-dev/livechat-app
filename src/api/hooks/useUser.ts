@@ -1,8 +1,6 @@
 import { login as loginT } from "@/types/credentials"
-import { AxiosError, AxiosResponse } from "axios"
 import { axiosInstance } from "../axiosInstance"
 import { signUpRes, token, userData } from "@/types/api"
-import { message } from "../../types/api"
 
 function useUser() {
   const login = async (credentials: loginT): Promise<token> => {

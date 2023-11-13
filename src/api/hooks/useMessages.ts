@@ -6,12 +6,6 @@ export default function useMessages() {
     return await axiosInstance.get("/messages").then((res) => res.data)
   }
 
-  // const getMessages = async (): Promise<message[]> => {
-  //   return await new Promise((resolve) => {
-  //     setTimeout(() => resolve(messages), 2000)
-  //   })
-  // }
-
   const sendMessage = async (message: string): Promise<message> => {
     try {
       const res = await axiosInstance.post<message>("/messages", {

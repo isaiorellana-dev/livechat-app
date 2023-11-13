@@ -51,7 +51,7 @@ const MessageSender = () => {
         <input
           type="text"
           className="w-full text-slate-900 px-1.5 h-9"
-          placeholder="Inicia sesión para enviar mensajes."
+          placeholder="Log in to send messages."
           readOnly
         />
         <button className="bg-cyan-500 p-0.5" type="submit">

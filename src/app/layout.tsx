@@ -6,7 +6,7 @@ import BodyWrapper from "./components/BodyWrapper"
 export const metadata: Metadata = {
   title: "LiveChat App",
   description:
-    "Esta es una aplicacion hecha con NextJS, consiste en un chat en vivo similar al de Twitch.",
+    "This is an application built with NextJS 13, featuring a live chat similar to Twitch.",
 }
 
 export default function RootLayout({
