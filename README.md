@@ -25,4 +25,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Backend
 
-El backend de esta app esta construido con Go y lo puedes ver en este [repositorio](https://github.com/isaiorellana-dev/radio-chat-backend).
+The backend of this app is built with Go, and you can see it in this [repository](https://github.com/isaiorellana-dev/radio-chat-backend).
